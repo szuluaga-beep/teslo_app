@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:teslo_app/features/shared/shared.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
-      drawer: Drawer(
-        child: Text('drawer'),
+      drawer: SideMenu(
+        scaffoldKey: scaffoldKey,
       ),
       appBar: AppBar(
         title: Text('Products Screen'),

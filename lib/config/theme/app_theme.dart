@@ -7,7 +7,7 @@ const scaffoldBackgroundColor = Color(0xFFF8F7F7);
 class AppTheme {
   ThemeData getTheme = ThemeData(
       useMaterial3: true,
-      brightness: Brightness.light,
+      colorSchemeSeed: colorSeed,
       // texts
       textTheme: TextTheme(
           titleLarge: GoogleFonts.comicNeue()
