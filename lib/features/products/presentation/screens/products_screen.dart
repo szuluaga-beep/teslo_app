@@ -13,10 +13,28 @@ class ProductsScreen extends StatelessWidget {
         scaffoldKey: scaffoldKey,
       ),
       appBar: AppBar(
-        title: Text('Products Screen'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+        title: const Text('Products Screen'),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
       ),
-      body: Placeholder(),
+      body: const _ProductsView(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const Text('Nuevo producto'),
+        icon: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class _ProductsView extends StatelessWidget {
+  const _ProductsView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Eres genial'),
     );
   }
 }
