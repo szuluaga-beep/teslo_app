@@ -11,4 +11,8 @@ final appRouter = GoRouter(initialLocation: '/login', routes: [
     path: '/products',
     builder: (context, state) => const ProductsScreen(),
   ),
+  GoRoute(
+    path: '/register',
+    builder: (context, state) => const RegisterScreen(),
+  ),
 ]);

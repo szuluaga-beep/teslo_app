@@ -13,39 +13,34 @@ class LoginScreen extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        // appBar: AppBar(title: const Text('Login')),
-        body: GeometricalBackground(
-          child: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 80,
-                ),
-                const Icon(
-                  Icons.production_quantity_limits,
-                  color: Colors.white,
-                  size: 100,
-                ),
-                const SizedBox(
-                  height: 80,
-                ),
-                Container(
-                  width: double.infinity,
-                  // 160 de los sizedbox y 100 del icono
-                  height: size.height - 260,
-                  decoration: BoxDecoration(
-                      color: scaffoldBackgroundColor,
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(100))),
-                  child: const _LoginForm(),
-                )
-              ],
+          body: GeometricalBackground(
+              child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 80),
+            // Icon Banner
+            const Icon(
+              Icons.production_quantity_limits_rounded,
+              color: Colors.white,
+              size: 100,
             ),
-          ),
+            const SizedBox(height: 80),
+
+            Container(
+              height: size.height - 260, // 80 los dos sizebox y 100 el ícono
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: scaffoldBackgroundColor,
+                borderRadius:
+                    const BorderRadius.only(topLeft: Radius.circular(100)),
+              ),
+              child: const _LoginForm(),
+            )
+          ],
         ),
-      ),
+      ))),
     );
   }
 }
@@ -55,37 +50,26 @@ class _LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme;
+    final textStyles = Theme.of(context).textTheme;
 
-    return Column(
-      children: [
-        const SizedBox(
-          height: 20,
-        ),
-        Text(
-          'Login',
-          style: textStyle.titleLarge,
-        ),
-        const SizedBox(
-          height: 90,
-        ),
-        const CustomTextForm(
-          hintText: 'Correo electrónico',
-          keyBoardType: TextInputType.emailAddress,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const CustomTextForm(
-          obscureText: true,
-          hintText: 'Contraseña',
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: SizedBox(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
+      child: Column(
+        children: [
+          const SizedBox(height: 50),
+          Text('Login', style: textStyles.titleLarge),
+          const SizedBox(height: 90),
+          const CustomTextForm(
+            label: 'Correo',
+            keyBoardType: TextInputType.emailAddress,
+          ),
+          const SizedBox(height: 30),
+          const CustomTextForm(
+            label: 'Contraseña',
+            obscureText: true,
+          ),
+          const SizedBox(height: 30),
+          SizedBox(
               width: double.infinity,
               height: 60,
               child: CustomFilledButton(
@@ -93,16 +77,19 @@ class _LoginForm extends StatelessWidget {
                 color: Colors.black,
                 onPressed: () {},
               )),
-        ),
-        
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('No tienes cuenta'),
-            TextButton(onPressed: () => context.push('/register'), child: const Text('Crea una aquí'))
-          ],
-        )
-      ],
+          const Spacer(flex: 2),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('¿No tienes cuenta?'),
+              TextButton(
+                  onPressed: () => context.push('/register'),
+                  child: const Text('Crea una aquí'))
+            ],
+          ),
+          const Spacer(flex: 1),
+        ],
+      ),
     );
   }
 }
