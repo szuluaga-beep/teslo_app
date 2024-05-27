@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:teslo_app/features/auth/presentation/providers/login_form_provider.dart';
 import 'package:teslo_app/features/shared/shared.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -45,11 +47,13 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _LoginForm extends StatelessWidget {
+class _LoginForm extends ConsumerWidget {
   const _LoginForm();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final loginForm = ref.watch(loginFormProvider);
+
     final textStyles = Theme.of(context).textTheme;
 
     return Padding(
@@ -59,14 +63,21 @@ class _LoginForm extends StatelessWidget {
           const SizedBox(height: 50),
           Text('Login', style: textStyles.titleLarge),
           const SizedBox(height: 90),
-          const CustomTextForm(
+          CustomTextForm(
             label: 'Correo',
             keyBoardType: TextInputType.emailAddress,
+            onChanged: (value) =>
+                ref.read(loginFormProvider.notifier).onEmailChanged(value),
+            errorMessage:
+                loginForm.isFormPosted ? loginForm.email.errorMessage : null,
           ),
           const SizedBox(height: 30),
-          const CustomTextForm(
+          CustomTextForm(
             label: 'Contraseña',
             obscureText: true,
+            onChanged: (value) =>
+                ref.read(loginFormProvider.notifier).onPasswordChanged(value),
+            errorMessage: loginForm.password.errorMessage,
           ),
           const SizedBox(height: 30),
           SizedBox(
@@ -75,7 +86,9 @@ class _LoginForm extends StatelessWidget {
               child: CustomFilledButton(
                 text: 'Ingresar',
                 color: Colors.black,
-                onPressed: () {},
+                onPressed: () {
+                  ref.read(loginFormProvider.notifier).onFormSubmit();
+                },
               )),
           const Spacer(flex: 2),
           Row(
