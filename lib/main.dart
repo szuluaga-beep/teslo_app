@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Environment.apiUrl);
+    // print(Environment.apiUrl);
     return MaterialApp.router(
       title: 'Material App',
       theme: AppTheme().getTheme,
